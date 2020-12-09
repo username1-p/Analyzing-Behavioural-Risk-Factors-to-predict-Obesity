@@ -1,0 +1,30 @@
+---
+title: "Analyzing Behavioural Risk Factors to Predict Obesity"
+author: Full Name
+date: December 9, 2020
+output: pdf_document
+latex_engine: xelatex
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+# Introduction
+
+Obesity has become a growing health concern in recent years. In Canada, approximately one in four Canadian adults are obese (PHAC, CIHI). For children and young adults in the ages of six to 17, 8.6% are obese (PHAC, CIHI). There are numerous costs that are associated with obesity, as well as common diseases that can be linked to Obesity. This can decrease Canadian life expectancy, affect the health of Canadians, create costs for the healthcare systems, as well as increase costs incurred by life and health insurers. The World Health Organization states that Obesity has tripled since 1975. 
+
+It is important to know that Obesity is preventable (WHO). In this analysis, I will be using a survey dataset that collected data on behavioural factors that affect various preventable diseases. The goal of this analysis is to identify various behavioural factors that are important predictors of Obesity, and interpret these predictors. This will aid in making important government decisions, and help insurers make important decisions regarding actions they may want to take to reduce obesity and reduce the harmful economic costs and health care challenges that arise because of Obesity. I will be using a regression analysis to identify important variables, as well as interpret them. I will be identifying the most important behavioural factors. 
+
+This analysis will be based on a survey that collects data from people across the United States, thus, it is an observational study. The survey will determine which individuals are obese based on the data collected. This analysis will also be analyzing certain instrumental variables after the regression analysis to infer causality between the predictors and the outcome of obesity. These causality inferences can be extremely important to aid in important decision making to reduce Obesity, and help pre-obese patients take steps to mitigate the risk of Obesity and help physicians take steps to direct patients to prevent obesity. 
+
+This analysis will describe the dataset used, and methodologies used to collect the survey data in the “Data section”. The regression model used for statistical analysis will be described in the “Methods section”. In the “Results section”, the results of the regression analysis will be shown, which will include selected predictors, coefficients, and the final model selected. In the “Discussion section”, there will be a description of the results of modelling, as well as any causality between the predictors and outcome. There will be important interpretation discussed, as well as recommendations for decisionmakers in the government that would be interested in these key findings. There will be a discussion of weaknesses and further recommendations that would have led to a better study and analysis. 
+
+# References
+
+- “Obesity and Overweight.” World Health Organization, World Health Organization, 1 Apr. 2020, www.who.int/news-room/fact-sheets/detail/obesity-and-overweight.
+
+
+- “Obesity in Canada.” Public Health Agency of Canada(PHAC), and Canadian Institute for Health Information(CIHI). Canada.ca, Government of Canada, 23 June 2011, www.canada.ca/en/public-health/services/health-promotion/healthy-living/obesity-canada.html.
+
