@@ -134,10 +134,6 @@ data2 <-
          X_age_g,
          )
 
-#### What else???? ####
-# Maybe make some age-groups?
-# Maybe check the values?
-# Is vote a binary? If not, what are you going to do?
 
 data2<-
  data2 %>%
