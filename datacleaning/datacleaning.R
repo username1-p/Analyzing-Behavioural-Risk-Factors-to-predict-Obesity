@@ -1,13 +1,10 @@
 #### Preamble ####
-# Purpose: Prepare and clean the survey data downloaded from [...UPDATE ME!!!!!]
-# Author: Rohan Alexander and Sam Caetano [CHANGE THIS TO YOUR NAME!!!!]
-# Data: 22 October 2020
-# Contact: rohan.alexander@utoronto.ca [PROBABLY CHANGE THIS ALSO!!!!]
+# Purpose: Prepare and clean the survey data downloaded from kaggle(originally BRFSS website )
+# Author: Prinsa Gandhi
+# Data: 22 December 2020
+# Contact: prinsa.gandhi@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: 
-# - Need to have downloaded the data from X and save the folder that you're 
-# interested in to inputs/data 
-# - Don't forget to gitignore it!
+
 
 
 #### Workspace setup ####
@@ -133,7 +130,9 @@ data2 <-
          mscode,
          X_bmi5cat,
          
-         X_rfbmi5)
+         X_rfbmi5,
+         X_age_g,
+         )
 
 #### What else???? ####
 # Maybe make some age-groups?
@@ -147,5 +146,5 @@ data2<-
 
 # Saving the survey/sample data as a csv file in my
 # working directory
-#write_csv(data2, "survey.csv")
+#write_csv(data2, "survey1.csv")
 
