@@ -1,7 +1,7 @@
 #data analysis work
 library(kableExtra)
 library(imputeMissings)
-
+library(tidyverse)
 
 
 survey_data <- read.csv("F:/sta304/final/survey1.csv")
@@ -32,12 +32,16 @@ miss<- as.data.frame(miss)
 miss
 
 #if omit rows with NA values
-survey_data4 <- na.omit(survey_data3)
+#survey_data4 <- na.omit(survey_data3)
+
+#only removed >50%,  poor health 49% also remove it
+
+survey_data4 <- survey_data3[-c(8)]
 
 #impute missing variables
-data<- impute(survey_data3,object=NULL, method="median/mode") #median mode imputation
+data<- impute(survey_data4,object=NULL, method="median/mode") #median mode imputation
 
-
+#write_csv(data, "dataset1.csv")
 
 
 
