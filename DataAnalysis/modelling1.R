@@ -10,10 +10,10 @@ str(datamodel)
 datamodel<- datamodel[-c(2,37,38,40,63,64)]
 
 set.seed(1005245879)
-#sample is too big, take 50%
+#sample is too big, take sample
 datamodelsample<-datamodel[sample(seq_len(nrow(datamodel)), size = 20000),]
 
-## Create training and test set ##
+## Create training and test set 
 set.seed(1005245879)
 
 datamodelsample$ID <- seq.int(nrow(datamodelsample))
@@ -65,9 +65,9 @@ aic <- step(model1, trace = 1, k=2)
 
 # BIC
 n <- nrow(train)
-sel.var.bic <- step(model1, trace = 1, k = log(n), direction = "both") 
-sel.var.bic<-attr(terms(sel.var.bic), "term.labels")   
-sel.var.bic
+bic<- step(model1, trace = 1, k = log(n), direction = "both") 
+bic<-attr(terms(bic), "term.labels")   
+bic
 
 
 
@@ -113,9 +113,9 @@ length(which(train$obese==1))
 
 # BIC
 n <- nrow(train)
-sel.var.bic <- step(model2, trace = 1, k = log(n), direction = "both") 
-sel.var.bic<-attr(terms(sel.var.bic), "term.labels")   
-sel.var.bic
+bic <- step(model2, trace = 1, k = log(n), direction = "both") 
+bic<-attr(terms(bic), "term.labels")   
+bic
 
 #after bic
 
@@ -146,7 +146,7 @@ model4<- glm(formula = as.factor(obese) ~ numwomen + genhlth + bphigh4 +
              
              , family = "binomial", data = train)
 
-sel.var.bic2 <- step(model4, trace = 1, k = log(n), direction = "both")
+bic02 <- step(model4, trace = 1, k = log(n), direction = "both")
 
 #bic again
 
@@ -232,7 +232,7 @@ length(z)/4000
  
  
  
- ## Fit the model with lrm from rms package ##
+ ## Fit the model with lrm 
  #train,test, and full datamodel set
  lrm.final <- lrm(formula = as.factor(obese) ~ genhlth + toldhi2 + chccopd1 + 
                            educa + employ1 + sex + diffwalk + smoke100 + exerany2 + 
@@ -240,8 +240,7 @@ length(z)/4000
                          data = test ,
                   
                   x =TRUE, y = TRUE, model= T)
- cross.calib <- rms::calibrate(lrm.final, method="crossvalidation", B=10) # model calibration
- 
+ cross.calib <- rms::calibrate(lrm.final, method="crossvalidation", B=10) 
  par(family = 'serif')
  plot(cross.calib, las=1, xlab = "Predicted Probability")
  
@@ -272,56 +271,41 @@ length(z)/4000
  
  
  
- # Scatterplot
- gg <- ggplot(datamodelsample, aes(x=marital, y=obese)) + 
-   geom_point() + 
-   geom_smooth(method="loess", se=F) + 
-    
-   labs(subtitle="Area Vs Population", 
-        y="Population", 
-        x="Area", 
-        title="Scatterplot", 
-        caption = "Source: midwest")
- 
- plot(gg)
+
  
  
- g <- ggplot(datamodelsample, aes(marital, obese))
+ g1 <- ggplot(datamodelsample, aes(marital, obese))
  
  
- g + geom_point() + 
+ g1 + geom_point() + 
    geom_smooth(method="lm", se=F) +
-   labs(subtitle="mpg: city vs highway mileage", 
-        y="hwy", 
-        x="cty", 
-        title="Scatterplot with overlapping points", 
-        caption="Source: midwest")
+   labs(
+        y="y", 
+        x="x", 
+        title="y vs x", 
+       )
  
  
  
- g + geom_jitter(width = .5, size=1) +
-   labs(subtitle="mpg: city vs highway mileage", 
-        y="hwy", 
-        x="cty", 
-        title="Jittered Points")
+
  
  
  
  g2 <- ggplot(datamodelsample, aes(exerany2, obese))
  
  g2 + geom_jitter(width = .5, size=1) +
-   labs(subtitle="mpg: city vs highway mileage", 
-        y="hwy", 
-        x="cty", 
-        title="Jittered Points")
+   labs( 
+        y="y", 
+        x="x", 
+        title="title")
  
  g3 <- ggplot(datamodelsample, aes(employ1, obese))
  
  g3 + geom_jitter(width = .5, size=1) +
-   labs(subtitle="mpg: city vs highway mileage", 
-        y="hwy", 
-        x="cty", 
-        title="Jittered Points")+theme(axis.text.x = element_text(size = 7, angle = 90, hjust = 1))
+   labs(
+        y="y", 
+        x="x", 
+        title="title")+theme(axis.text.x = element_text(size = 7, angle = 90, hjust = 1))
  
  #genhlth + toldhi2 + chccopd1 + 
   # educa + employ1 + sex + diffwalk + smoke100 + exerany2 + 
@@ -330,9 +314,9 @@ length(z)/4000
  g4 <- ggplot(datamodelsample, aes(fruitju1, obese))
  
  g4 + geom_jitter(width = .5, size=1) +
-   labs(subtitle="mpg: city vs highway mileage", 
-        y="hwy", 
-        x="cty", 
-        title="Jittered Points")+theme(axis.text.x = element_text(size = 7, angle = 90, hjust = 1))
+   labs(
+        y="y", 
+        x="x", 
+        title="title")+theme(axis.text.x = element_text(size = 7, angle = 90, hjust = 1))
  
  
