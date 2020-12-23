@@ -5,7 +5,7 @@ date: December 22, 2020
 output: pdf_document
 latex_engine: xelatex
 
-abstract: This paper will be analyzing survey data collected in 2013 by the Behavioral Risk Factor Surveillance System (BRFSS) project, in the United States. The focus of this analysis will be on *Obesity*. A paper includes a comprehensive analysis of the BRFSS dataset, and will focus on the response variable of whether a person is obese, based on several key predictors. After cleaning and preparing the BRFSS data, exploratory data analysis was performed. Next, numerous variable selection methods were used. Finally, the best model for prediction of obesity was chosen. There are very interesting results obtained during this analysis, which will be discussed throughout the paper. This analysis will be very important for public health workers, medical field workers, and government officials to make decisions to decrease the risk of obesity, as well as reduce healthcare spending which can be due to obesity. In addition, insurance companies and the general public will benefit from this analysis, and use the data to make decisions.  
+abstract: This paper will be analyzing survey data collected in 2013 by the Behavioral Risk Factor Surveillance System (BRFSS) project in the United States. The focus of this analysis will be on *Obesity*. This paper includes a comprehensive analysis of the BRFSS dataset, and will focus on the predicting the response variable of whether a person is obese, based on several key predictors. After cleaning and preparing the BRFSS data, exploratory data analysis was performed. Next, numerous variable selection methods were used. Finally, the best model for prediction of obesity was chosen. There are very interesting results obtained during this analysis, which will be discussed throughout the paper. This analysis will be very important for public health workers, medical field workers, and government officials to make decisions to decrease the risk of obesity, as well as reduce healthcare spending which can be due to obesity. In addition, insurance companies and the general public will benefit from this analysis, and use the data to make important decisions.  
 
 keywords: Obesity, Regression, Prediction, Behavioural Risk Factors, Survey
 
@@ -33,22 +33,24 @@ library(gtsummary)
 [github](https://github.com/username1-p/Analyzing-Behavioural-Risk-Factors-to-predict-Obesity)
 https://github.com/username1-p/Analyzing-Behavioural-Risk-Factors-to-predict-Obesity
 
+### Keywords
+Obesity, Regression, Prediction, Behavioral Risk Factors, Survey, Center for Disease Control and Prevention, Health, Generalized Linear Model
 
 # Introduction
 
   Obesity has become a growing health concern in recent years. In Canada, approximately one in four Canadian adults are obese (PHAC, CIHI). For children and young adults in the ages of six to 17, 8.6% are obese (PHAC, CIHI). There are numerous costs that are associated with obesity, as well as common diseases that can be linked to Obesity. This can decrease Canadian life expectancy, affect the health of Canadians, create costs for the healthcare systems, as well as increase costs incurred by life and health insurers. The World Health Organization states that Obesity has tripled since 1975. 
 
-  It is important to know that Obesity is preventable (WHO). In this analysis, I will be using a survey dataset that collected data on behavioural factors that affect various preventable diseases. The goal of this analysis is to identify various behavioural factors that are important predictors of Obesity, and interpret these predictors. This will aid in making important government decisions, and help insurers make important decisions regarding actions they may want to take to reduce obesity and reduce the harmful economic costs and health care challenges that arise because of Obesity. I will be using a regression analysis to identify important variables, as well as interpret them. I will be identifying the most important behavioural factors. 
+  It is important to know that Obesity is preventable (WHO). This analysis will be using a survey dataset that has collected data on behavioral factors that affect various preventable diseases. The goal of this analysis is to identify various behavioral factors that are important predictors of Obesity, and interpret these predictors. This will aid in making important government decisions, and help insurers make important decisions regarding actions they may want to take to reduce obesity and reduce the harmful economic costs and health care challenges that arise because of Obesity. The analysis will be using a regression analysis to identify important variables, as well as interpret them. This will aid in identifying the most important behavioral factors. 
 
-  This analysis will be based on a survey that collects data from people across the United States, thus, it is an observational study. The survey will determine which individuals are obese based on the data collected. This analysis will also be analyzing certain instrumental variables after the regression analysis to infer causality between the predictors and the outcome of obesity. These causality inferences can be extremely important to aid in important decision making to reduce Obesity, and help pre-obese patients take steps to mitigate the risk of Obesity and help physicians take steps to direct patients to prevent obesity. 
+  This analysis will be based on a survey that collects data from people across the United States, thus, it is using survey data. The survey will be used to determine which individuals are obese based on the data collected. The interpretation of the results can be extremely important to aid in important decision making to reduce Obesity, and help pre-obese patients take steps to mitigate the risk of Obesity and help physicians take steps to direct patients to prevent obesity. 
 
-  This analysis will describe the dataset used, and methodologies used to collect the survey data in the “Data section”. The regression model used for statistical analysis will be described in the “Methods section”. In the “Results section”, the results of the regression analysis will be shown, which will include selected predictors, coefficients, and the final model selected. In the “Discussion section”, there will be a description of the results of modelling, as well as any causality between the predictors and outcome. There will be important interpretation discussed, as well as recommendations for decisionmakers in the government that would be interested in these key findings. There will be a discussion of weaknesses and further recommendations that would have led to a better study and analysis. 
+  This analysis will describe the dataset used, and methodologies used to collect the survey data in the “Data section”. The regression model used for statistical analysis will be described in the “Methods section”. In the “Results section”, the results of the regression analysis will be shown, which will include selected predictors, coefficients, and the final model selected. In the “Discussion section”, there will be a description of the results of modeling, as well as any additional observations regarding the predictors and outcome. There will be important interpretation discussed, as well as recommendations for decision makers in the government that would be interested in these key findings. There will be a discussion of weaknesses and further recommendations that would have led to a better study and analysis. 
 
 # Data
 
-  This information is shown in greater detail, on the CDC website, which is mentioned in the references. While the original data is from the CDC website, the data version I have used is obtained from Kaggle, and it is a bit more useable format of the data, since it is a bit more cleaned than the original data. However, it is originally obtained from the CDC website, thus, I will mention all information about the data from the CDC website. 
+  This information is shown in greater detail, on the CDC website, which is mentioned in the references. While the original data is from the CDC website, the data version I have used is obtained from Kaggle, and it is a bit more usable format of the data, since it is a bit more cleaned than the original data. However, it is originally obtained from the CDC website, thus, I will mention all information about the data from the CDC website. 
 
-  The data used is collected by the Behavioral Risk Factor Surveillance System (BRFSS). The BRFSS project is used to collect behavioural risk factors for non-institutionalized adults living in the United States. The definition of adults is those who are 18 years of age or older. The very complex survey project is a collaboration states and territories in the United States, and Centers for Disease Control and Prevention (CDC). The BRFSS is administered by the CDC’s population health surveillance branch. This survey collected data from all 50 states, and the District of Columbia, Puerto Rico, Guam, and US Virgin Islands. According to CDC, it is stated that “The BRFSS objective is to collect uniform, state-specific data on preventive health practices and risk behaviors that are linked to chronic diseases, injuries, and preventable infectious diseases that affect the adult population” (CDC). There is a wide range of data collected in the survey, which include factors such as exercise, sleep, health outlook, smoking and alcohol use, healthy eating, and important health conditions. This is a very rich dataset to analyze, however, in my analysis, I decided to clean the original data and select key predictors that seemed to be most important to predict whether an individual is obese. 
+  The data used is collected by the Behavioral Risk Factor Surveillance System (BRFSS). The BRFSS project is used to collect behavioral risk factors for non-institutionalized adults living in the United States. The definition of adults is those who are 18 years of age or older. The very complex survey project is a collaboration states and territories in the United States, and Centers for Disease Control and Prevention (CDC). The BRFSS is administered by the CDC’s population health surveillance branch. This survey collected data from all 50 states, and the District of Columbia, Puerto Rico, Guam, and US Virgin Islands. According to CDC, it is stated that “The BRFSS objective is to collect uniform, state-specific data on preventive health practices and risk behaviors that are linked to chronic diseases, injuries, and preventable infectious diseases that affect the adult population” (CDC). There is a wide range of data collected in the survey, which include factors such as exercise, sleep, health outlook, smoking and alcohol use, healthy eating, and important health conditions. This is a very rich dataset to analyze, however, in my analysis, I decided to clean the original data and select key predictors that seemed to be most important to predict whether an individual is obese. 
 
   In terms of collecting the data, the BRFSS conducted surveys on both landline and mobile phones. There are interviewers who collect data from adults in a household, whom are randomly selected to take part in this survey. The adults who are called on mobile phones are those who live in college or private residence. The survey development process is a collaboration between CDC and state health departments. Then, the state health departments conduct the surveys themselves, and the CDC collects all state data to analyze and process. 
   
@@ -63,9 +65,13 @@ https://github.com/username1-p/Analyzing-Behavioural-Risk-Factors-to-predict-Obe
   For mobile phone numbers, in 2013, the sampling frame was the Telecordia database of telephone exchanges. There were numbers sorted by area codes within states. The BRFSS used the population of the sampling frames’ telephone numbers divided by desired sample size, to create K. This formed an interval. Then, the desired sample size intervals were created of the size K. Then, in each interval, there was one random selection of a telephone number. The target population for mobile numbers were adults in private residence or college residence, and received larger than 90% of their calls on their mobile number. The sampling frame, and sampled population selection is discussed earlier for mobile phones. 
 Interview Process
 
-  The process of interview used a Computer-Assisted Telephone Interview system. The time taken was about 18 minutes for core questions (CDC). The additional state specific and optional questions took about 5-10 minutes (CDC). Interviewers were given training. Data is submitted to the CDC monthly by states, and CDC continuously works, monitors and edits to prepare the final year-end data. The CDC also continuously monitors and works to improve the CATI system used. The respondents who refused to answer some questions are shown in the dataset as the refused answer option. Then, data weighting is performed, so that assumptions can be met, and that populations can be reflected by the data. They follow design weight and raking methods. 
+  The process of interview used a Computer-Assisted Telephone Interview system. The time taken was about 18 minutes for core questions (CDC). The additional state specific and optional questions took about 5-10 minutes (CDC). Interviewers were given training. Data is submitted to the CDC monthly by states, and CDC continuously works, monitors and edits to prepare the final year-end data. The CDC also continuously monitors and works to improve the CATI system used. The respondents who refused to answer some questions are shown in the dataset as the refused answer option.In the data, most questions had an option for non-response.  Then, data weighting is performed, so that assumptions can be met, and that populations can be reflected by the data. They follow design weight and raking methods. 
+  
+  The survey is very complex and well developed. There is some types of improvement discussed in the discussion section, but it is very rich data that can lead to numerous results. It is very representative of America's population,and can be further used to be representative of similar first world country populations. The variables used for this analysis will be shown in the methods and results section, which are obtained using model selection methods. There were a total of 330 original variables. 
   
 # Exploratory Data Analysis
+
+This section includes plots of EDA which helped analyze and understand the data. The plots are enlarged to show the points, because in smaller sizes, the points are clustered and it does not lead to an appropriate analysis. 
 
 ```{r, echo=FALSE, include=FALSE}
 datamodel <- read.csv("F:/sta304/final/dataset1.csv", stringsAsFactors = T)
@@ -81,7 +87,7 @@ datamodelsample$ID <- seq.int(nrow(datamodelsample))
 ```
 
 Plot 1
-```{r,include=TRUE, echo=FALSE, fig.height = 3, fig.width = 3, fig.align = "center"}
+```{r,include=TRUE, echo=FALSE, fig.height = 5, fig.width = 5, fig.align = "center"}
 
 
   g2 <- ggplot(datamodelsample, aes(exerany2, obese))
@@ -94,7 +100,7 @@ Plot 1
 
 ```
 
-  In plot 1, the effect of exercise on whether a person has obesity is analyzed. Looking at the plot, it is clear that for no exercise, the proportion of people obese are higher. For the people that answered yes, it still seems that there is a split between obesity and non-obesity, further investigation is needed. It could be because of other lifestyle factors that cause the obesity in people who do exercise. 
+  In plot 1, the effect of exercise on whether a person has obesity is analyzed. Looking at the plot, it is clear that for no exercise, the proportion of people obese are higher. For the people that answered yes, it still seems that there is a split between obesity and non-obesity, further investigation is needed. It could be because of other lifestyle factors that cause the obesity in people who do exercise. The dataset has many observations,  in a further enlarged plot, the results seem to look slightly different. It seems exercise is important to consider. 
   
   Plot 2
 ```{r, include=TRUE, echo=FALSE, fig.height = 3, fig.width = 3, fig.align = "center"}
@@ -120,10 +126,10 @@ Plot 1
   
 ```
   
-  This plot is quite interesting. It can be noticed that for the "yes" level of having high blood pressure, there is a big split in the sample. It seems that most with high blood pressure are likely obese. The option of not being obese with high blood pressure is only shown with a small dot, thus, this an important risk factor to consider. For all other levels, there is a spread of being obese and not being obese. 
+  This plot is quite interesting. It can be noticed that for the "yes" level of having high blood pressure, there is a big split in the sample. It seems that most with high blood pressure are likely obese. The option of not being obese with high blood pressure is only shown with a small dot, thus, this an important risk factor to consider. For all other categorical levels, there is a spread of being obese and not being obese. 
   
   Plot 4
-```{r,include=TRUE, echo=FALSE, fig.height = 3, fig.width = 3, fig.align = "center"}
+```{r,include=TRUE, echo=FALSE, fig.height = 5, fig.width = 5, fig.align = "center"}
 g <- ggplot(datamodelsample, aes(marital, obese))
  g + geom_jitter(width = .5, size=1) +
    labs( 
@@ -139,7 +145,7 @@ g <- ggplot(datamodelsample, aes(marital, obese))
   
   Plot 5
   
-```{r,include=TRUE, echo=FALSE, fig.height = 3, fig.width = 3, fig.align = "center"}
+```{r,include=TRUE, echo=FALSE, fig.height = 5, fig.width = 5, fig.align = "center"}
   
  g3 <- ggplot(datamodelsample, aes(employ1, obese))
  
@@ -151,7 +157,7 @@ g <- ggplot(datamodelsample, aes(marital, obese))
   
 ```
   
-  While analyzing plot 5, it seems that for employed workers, retired individuals, self-employed and unable to work individuals, there is a higher proportion of people who are obese. This is interesting and important to  consider for a prediction model. 
+  While analyzing plot 5, it seems that for employed workers, retired individuals, self-employed and unable to work individuals, there is a higher proportion of people who are obese. This is interesting and important to  consider for a prediction model. This seems to be an important predictor variable. 
 
 # Methods
 
@@ -161,7 +167,7 @@ g <- ggplot(datamodelsample, aes(marital, obese))
 
   After analyzing the original dataset, it can be seen there are 491775 observations of 330 variables, for the year 2013. This was a very large, rich dataset. The first step was to analyze all variables included, and it was decided to select the variables that would be most important for my regression model to predict obesity. After reviewing, the dataset was modified to include 109 variables. A new “obese” variable was created, which was created from original variables in the dataset, indicating obesity in an individual based on the survey. This was created to aid in the regression analysis. A new modified dataset was created and saved, based on first procedure to clean the data. 
 
-  The next step is to use this dataset, and further clean it. I realized that the dataset had many missing values in the responses, as individual chose not to respond to questions or did not have answers to certain questions. I decided to remove rows that had missing values for the obese outcome variable, since that was an important variable in order to create an accurate model. Then, I decided to remove variables that had greater than 49 percent of missing values, because I did not want to impute those variables and create an inaccurate model. An option I considered was creating a regression model to estimate values for these missing variables, but there were too many missing values, so I did not choose to create a model. The variables I removed were college housing, blood pressure medicine, current as asthma related questions, some smoking variables, exercise related questions, prediabetes questions, blood sugar, pain, emotions, sugar drinks, sugar fruit drinks, sodium intake, aspirin intake, some reactions to race questions and self-identification, mental health and stigma, social context questions like rent or meals, and life satisfaction. These topics had numerous questions about them, however, due to many missing values and also considering its significance to the obesity model, I decided to remove the ones with large missing values. 
+  The next step is to use this dataset, and further clean it. I realized that the dataset had many missing values in the responses, as individual chose not to respond to questions or did not have answers to certain questions. I decided to remove rows that had missing values for the "obese" outcome variable, since that was an important variable in order to create an accurate model. Then, I decided to remove variables that had greater than 49 percent of missing values, because I did not want to impute those variables and create an inaccurate model. An option I considered was creating a regression model to estimate values for these missing variables, but there were too many missing values, so I did not choose to create a model. The variables I removed were college housing, blood pressure medicine, current as asthma related questions, some smoking variables, exercise related questions, prediabetes questions, blood sugar, pain, emotions, sugar drinks, sugar fruit drinks, sodium intake, aspirin intake, some reactions to race questions and self-identification, mental health and stigma, social context questions like rent or meals, and life satisfaction. These topics had numerous questions about them, however, due to many missing values and also considering its significance to the obesity model, I decided to remove the ones with large missing values. 
   
   For remaining variables with missing values less than 49%, I decided to use median or mode imputation. I felt many of the variables with missing values had a higher percentage of certain responses. For example, the responses could be 80% “yes”, that is why I decided to use the median or mode imputation, because I thought that the numbers would still represent the entire population. I did feel that this would underestimate variance, and create some distortion, however, for many of the variables it seemed to fit in well. I found that the mean would still be the same, and was very easy to implement for the categorical variables.  
   
@@ -171,12 +177,15 @@ g <- ggplot(datamodelsample, aes(marital, obese))
 
   After creating the final dataset for use in modelling, I decided to create train and test sets from the original data. The original data had 465,046 observations, however, I decided to choose a small train and test sample. In creating a regression model, it is very difficult to run tests and perform model selection in a large sample, which would not be very effective using the glm function in R. This will be discussed in the weaknesses section. I analyzed some of the variables, and found that some variables only have 1 factor. For example, for the variable “PVTRESDD1”, 99.99% of respondents chose “Yes”, for the question regarding if the individual was responding from a private residence. These variables had to removed, because they did not seem to have big impacts on the model, since most of the responses were the same. After removing variables, I created a sample set of the dataset which contained 20,000 observations. This was created by using simple random sampling without replacement. I created a training set of 16,000 observations, and test set of 4000 observations, both collected from the sample set using simple random sampling without replacement. 
   
-  First, I created a logistic regression model using all the variables available, using the GLM function. I analyzed p-values to determine significant variables, and decided to remove variables that seemed insignificant to my model. There were also some variables causing perfect separation in the initial model, however, after reducing variables to the significant ones, that did not occur again. I performed AIC and BIC stepwise methods for model selection, and to try to obtain the most important predictors. I created a few more models, and continued using AIC and BIC model selection methods. The reason I continued performing model selection is due to the fact that the initial models had too many variables, and I did not want to overfit to the training dataset. In the initial models, factors such as vegetables or fruit intake did not seem to be significant. However, I felt there was correlation between many of my variables, and since the goal of my model was also to interpret important behavioral factors that predict obesity, I decided to include them in the later models. I performed AIC tests, and I compared 2 models using the ANOVA function. This helped compare the residuals and deviance in the models. 
-After numerous model selection procedures, the best model for prediction  of whether a person  was obese was chosen.The final model had a dependent variable which followed a binomial distribution, each observation was independent in the survey since individuals were interviewed only once. The model uses a GLM which uses the logit link. 
-
-  The model I chose is shown below: 
+  First, I created a logistic regression model using all the variables available, using the GLM function in Rstudio. I analyzed p-values to determine significant variables, and decided to remove variables that seemed insignificant to my model. There were also some variables causing perfect separation in the initial model, however, after reducing variables to the significant ones, that did not occur again. I performed AIC and BIC stepwise methods for model selection, and to try to obtain the most important predictors. I created a few more models, and continued using AIC and BIC model selection methods. The reason I continued performing model selection is due to the fact that the initial models had too many variables, and I did not want to overfit to the training dataset. In the initial models, factors such as vegetables or fruit intake did not seem to be significant. However, I felt there was correlation between many of my variables, and since the goal of my model was also to interpret important behavioral factors that predict obesity, I decided to include them in the later models. I performed AIC tests, and I compared 2 models using the ANOVA function. This helped compare the residuals and deviance in the models. 
   
-  My model is based on the predictors that are self-perception of general health, whether a person was told by a medical professional that they have high blood cholesterol, whether a person was told if they have Chronic Obstructive Pulmonary Disease, emphysema or bronchitis, education, employment, sex, whether a person has difficulty walking, whether a person has smoked 100 cigarettes in their life, whether a person exercised in the last month, marital status, and whether a person ate vegetables during the past month. A note is that the last variable did not count "green", or "orange" colored vegetables as those were asked in other survey questions. The model converges and has no issues. 
+  After numerous model selection procedures, the best model for prediction  of whether a person  was obese was chosen.The final model had a dependent variable which followed a binomial distribution, each observation was independent in the survey since individuals were interviewed only once. The model uses a GLM which uses the logit link. 
+
+  For this model, the data used was a mix of numerical and categorical variables. For example, the "smoke100" variable, which asked whether one smoked in the last 100 days, was a variable representing yes or no. These variables were used as categorical, because the goal of the analysis was to interpret the model as well. It is important to see if certain behaviors can change the obesity outcome, and compare different behaviors. The age variable was split up into age groups in the dataset, and this was important, because certain age groups seem to have similar health. In categorical variables, the logistic regression uses one category as the baseline, and other categories are compared to the baseline. The GLM made sense according the data and objective, however, there will be discussion later regarding other models that may better handle data as big as this dataset. There are random forest, and complex machine-learning techniques with better prediction ability. 
+  
+  My model is based on the predictors that are self-perception of general health, whether a person was told by a medical professional that they have high blood cholesterol, whether a person was told if they have Chronic Obstructive Pulmonary Disease, emphysema or bronchitis, education, employment, sex, whether a person has difficulty walking, whether a person has smoked 100 cigarettes in their life, whether a person exercised in the last month, marital status, and whether a person ate vegetables during the past month. A note is that the last variable did not count "green", or "orange" colored vegetables as those were asked in other survey questions. The model converges and has no issues. The diagnostic checks performed will be discussed in the results section. The model passed diagnostic tests such as checking residual plots, or cross-calibration plots. The predictors were chosen using model selection methods, but also using characteristics of the survey. The predictors with responses that were representative of populations were used, and predictors which can be interpreted to make important decisions were used. 
+  
+    The model I chose is shown below: 
 
 
 $$ logit(\pi_i) = \beta_0+\beta_1  x_{genhlth} + \beta_2  x_{toldhi2} +\beta_3  x_{chccopd1} +\beta_4  x_{educa} +\beta_5  x_{employ1} +\beta_6  x_{sex} +
@@ -208,7 +217,7 @@ test <- datamodelsample[!datamodelsample$ID %in% train$ID,]
 ```
  
  
-  Here are my model results shown with the full summary table. This is also included in the appendix.  
+  Table 1 shows the model results with the full summary table. This is also included in the appendix.  
 
   Table 1-Logistic Model for Obesity
 ```{r, include=TRUE}
@@ -219,7 +228,7 @@ summary(newmodel)
   There are numerous results and interpretation  obtained from table 1. This include the coefficients for the predictors, standard errors, and the z-values. The probabilities for the z-values are also shown,  and the significant predictors can be seen. Lastly, there are some statistics included such as AIC, residual deviance, etc.The interpretation is further explained in the discussion section.   
 
 
-  Here is a model displaying the odds ratios for the variables. 
+  Table 2 is below, which displays the odds ratios for the variables. 
   
   Table 2-Summary Statistics-Odds Ratio 
 ```{r, include=TRUE, message=FALSE}
@@ -254,6 +263,8 @@ length(z)/4000
 
 
 ## Diagnostics
+  
+  These diagnostic methods will be further discussed in the discussion section. 
 
   The model  was also used on  the test set to check for the cross calibration plot. This is used to compared the predicted probabilities and see if they are seem to be accurate.  
 
@@ -327,10 +338,12 @@ plot(newmodel)
 
 ### Discussion  of Results
 
-  While analyzing the table 1(summary of the logistic regression), there are many interesting results. For example, for a general health value of "fair", versus the general health value of "excellent"(baseline category), the change in the log odds of obesity is 0.789. For the told high cholesterol predictor(toldhi2), the value of "Yes", versus the value of "no"(baseline category), the change in the log odds of obesity is 0.534.There are similar interpretations for the rest of the predictors shown in the table 1, and appendix. It can be noted that the variables have very significant p-values, and low standard error values. The AIC value is 19477. For certain categorical variables, it seems that some categories have much more significance than other categories. For example, in marital status, the married category seems to be more significant for the model. 
+  While analyzing the table 1(summary of the logistic regression), there are many interesting results. For example, for a general health value of "fair", versus the general health value of "excellent"(baseline category), the change in the log odds of obesity is 0.789. For the told high cholesterol predictor(toldhi2), the value of "Yes", versus the value of "no"(baseline category), the change in the log odds of obesity is 0.534.There are similar interpretations for the rest of the predictors shown in the table 1. It can be noted that the variables have very significant p-values, and low standard error values. The AIC value is 19477. For certain categorical variables, it seems that some categories have much more significance than other categories. For example, in marital status, the married category seems to be more significant for the model. 
 
     
-  The table of odds ratio(table 2) leads to many important results, and important interpretation as well. For the ratio of odds of general health being "fair",  versus the ratio of odds of general health being "excellent", the odds of being obese increase by a factor of 2.20. In "poor" health, it increases by a factor of 1.32. Looking at education, for the education level less than college (additional 1-4 years), it seems that the odds of being obese increase by greater factors. Looking at employment, the odds of being obese as an employed worker increase by a factor of 1.47 compared to the odds of being obese in the baseline category of "homemaker". That is an interesting results, and further investigation is needed. A few questions that arise are that if working people do not have enough time to manage their health, or if those who are homemaker are more active and fit during the day? The odds of being obese as a male increase by the factor of 1.78, versus of the odds of being obese as the female(baseline category). Thus, it seems more attention should be given to the male sex, since it seems that they are at a greater risk of obesity. If one is experiencing difficulty walking, the odds of being obese increase by a factor of 1.52, compared to odds of not experiencing difficulty walking. The p-value for this predictor is also extremely significant, which I noticed during the AIC/BIC model selection process as well. Thus, this variable should be an important question to consider as an insurer or doctor. It seems that exercising increasing the odds of being obese by a factor of 0.8, compared to the odds of being obese while not exercising. Thus, it seems to beneficial, since the factor is <1, and should decrease the odds of obesity. Looking at martial status,  being divorced has an odds of being obese increase by a factor of 1.26,  compared to the odds of being obese as an unmarried couple baseline category. Being married increases the odds of being obese by a factor of 1.37, versus the baseline category of being an unmarried couple. For the vegetable variable, eating other vegetables has an odds ratio of 1, and this means that intake of vegetables can be equally likely for both study groups; individual being obese or not. This is quite interesting, since it seems according to scientific research, eating healthy has numerous benefits for the body. There should be further investigation, and more questions regarding junk food vs healthy food, to further understand the differences. This survey did have some questions regarding sugar, salt, and sugar drinks; however, they were not extremely significant in my model for prediction. 
+  The table of odds ratio(table 2) leads to many important results, and important interpretation as well. For the ratio of odds of general health being "fair",  versus the ratio of odds of general health being "excellent", the odds of being obese increase by a factor of 2.20. In "poor" health, it increases by a factor of 1.32. Looking at education, for the education level less than college (additional 1-4 years), it seems that the odds of being obese increase by greater factors. Looking at employment, the odds of being obese as an employed worker increase by a factor of 1.47 compared to the odds of being obese in the baseline category of "homemaker". That is an interesting result, and further investigation is needed. A few questions that arise are that if working people do not have enough time to manage their health, or if those who are homemaker are more active and fit during the day? 
+  
+  There are many interesting observatios in table 2. The odds of being obese as a male increase by the factor of 1.78, versus of the odds of being obese as the female(baseline category). Thus, it seems more attention should be given to the male sex, since it seems that they are at a greater risk of obesity. If one is experiencing difficulty walking, the odds of being obese increase by a factor of 1.52, compared to odds of not experiencing difficulty walking. The p-value for this predictor is also extremely significant, which I noticed during the AIC/BIC model selection process as well. Thus, this variable should be an important question to consider as an insurer or doctor. It seems that exercising increasing the odds of being obese by a factor of 0.8, compared to the odds of being obese while not exercising. Thus, it seems to beneficial, since the factor is <1, and should decrease the odds of obesity. Looking at martial status,  being divorced has an odds of being obese increase by a factor of 1.26,  compared to the odds of being obese as an unmarried couple baseline category. Being married increases the odds of being obese by a factor of 1.37, versus the baseline category of being an unmarried couple. For the vegetable variable, eating other vegetables has an odds ratio of 1, and this means that intake of vegetables can be equally likely for both study groups; individual being obese or not. This is quite interesting, since it seems according to scientific research, eating healthy has numerous benefits for the body. There should be further investigation, and more questions regarding junk food vs healthy food, to further understand the differences. This survey did have some questions regarding sugar, salt, and sugar drinks; however, they were not extremely significant in my model for prediction. 
  
   The prediction error is 67.2%, and that means my model is quite good for prediction. This is a high number for prediction, and the model is working quite well. The cross calibration plots show that the estimates are very close to the true value, since they are near the 45 degree line. It shows the model works well. 
 
@@ -363,7 +376,7 @@ summary(newmodel)
 
 ```
 
-Here is a list of missing values observed in the variables of the dataset. 
+This is a list of missing values observed in the variables of the dataset. 
 
 ```{r,include=TRUE}
 #checking missing values
@@ -390,10 +403,70 @@ miss
 
 # References
 
-- “CDC - BRFSS 2013 Survey Data and Documentation. 2013 BRFSS Overview. .” Centers for Disease Control and Prevention, Behavioral Risk Factor Surveillance System , 23 July 2013, www.cdc.gov/brfss/annual_data/annual_2013.html.
+- “CDC - BRFSS 2013 Survey Data and Documentation. 2013 BRFSS Overview.” Centers for Disease Control and Prevention, Behavioral Risk Factor Surveillance System , 23 July 2013, www.cdc.gov/brfss/annual_data/annual_2013.html.
+
+- “CDC - BRFSS 2013 Survey Data and Documentation. 2013 BRFSS Codebook Report.” Centers for Disease Control and Prevention, Behavioral Risk Factor Surveillance System , 23 July 2013, www.cdc.gov/brfss/annual_data/annual_2013.html.
+
+-  Daniel D. Sjoberg, Michael Curry, Margie Hannum, Karissa Whiting and Emily C.
+Zabor (2020). gtsummary: Presentation-Ready Data Summary and Analytic Result
+Tables. R package version 1.3.5. https://CRAN.R-project.org/package=gtsummary
+
+- Frank E Harrell Jr (2020). rms: Regression Modeling Strategies. R package
+version 6.0-1. https://CRAN.R-project.org/package=rms
+  
+- Hao Zhu (2020). kableExtra: Construct Complex Table with 'kable' and Pipe
+Syntax. R package version 1.2.1.
+https://CRAN.R-project.org/package=kableExtra
+
+-  H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New
+York, 2016.
+
+- JJ Allaire and Yihui Xie and Jonathan McPherson and Javier Luraschi and Kevin Ushey and Aron Atkins and Hadley Wickham and Joe Cheng and Winston Chang and Richard Iannone (2020). rmarkdown: Dynamic Documents for R. R package version 2.3.  https://rmarkdown.rstudio.com.
+
+- LPLenka. 2020, November. BRFSS Data. The Behavioral Risk Factor Surveillance System (BRFSS) 2013. Version 3.https://www.kaggle.com/lplenka/brfss-data.  
+
+- Matthijs Meire, Michel Ballings and Dirk Van den Poel (2016).
+imputeMissings: Impute Missing Values in a Predictive Context. R package
+version 0.0.3. https://CRAN.R-project.org/package=imputeMissings
 
 - “Obesity and Overweight.” World Health Organization, World Health Organization, 1 Apr. 2020, www.who.int/news-room/fact-sheets/detail/obesity-and-overweight.
 
-
 - “Obesity in Canada.” Public Health Agency of Canada(PHAC), and Canadian Institute for Health Information(CIHI). Canada.ca, Government of Canada, 23 June 2011, www.canada.ca/en/public-health/services/health-promotion/healthy-living/obesity-canada.html.
+
+- R Core Team (2020). R: A language and environment for statistical computing. R, Foundation for Statistical Computing, Vienna, Austria. URL, https://www.R-project.org/.
+
+- Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source
+Software, 4(43), 1686, https://doi.org/10.21105/joss.01686
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
 

@@ -8,7 +8,6 @@
 
 
 #### Workspace setup ####
-library(haven)
 library(tidyverse)
 
 setwd("F:/sta304/final")
